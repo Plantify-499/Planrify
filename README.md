@@ -61,7 +61,7 @@ To use Plantify, you will need to install TensorFlow. Here are the installation 
 python .\detect_from_images.py -m C:\path\to\the\model\content\inference_graph\saved_model\ -l .\labelmap.pbtxt -i C:\path/to/images/folder
 
 Result:
-https://github.com/Plantify-499/Planrify/blob/a82ae54aa5d8bf0ede7ce527199ff114e1192b97/outputs/detection_output0.png
+outputs/detection_output0.png
 
 ## Contributing
 
