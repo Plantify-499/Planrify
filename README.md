@@ -60,8 +60,7 @@ To use Plantify, you will need to install TensorFlow. Here are the installation 
 
 python .\detect_from_images.py -m C:\path\to\the\model\content\inference_graph\saved_model\ -l .\labelmap.pbtxt -i C:\path/to/images/folder
 
-Result:
-outputs/detection_output0.png
+![Result](outputs/detection_output0.png)
 
 ## Contributing
 
