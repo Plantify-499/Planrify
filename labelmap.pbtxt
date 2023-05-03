@@ -1,0 +1,20 @@
+item {
+    id: 1
+    name: 'Basil'
+}
+item {
+    id: 2
+    name: 'Lemon'
+}
+item {
+    id: 3
+    name: 'Mango'
+}
+item {
+    id: 4
+    name: 'Lemon_Diseased'
+}
+item {
+    id: 5
+    name: 'Mango_Diseased'
+}
