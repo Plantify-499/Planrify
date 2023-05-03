@@ -2,7 +2,7 @@
 
 ## Description
 
-Plantify is a machine learning project that uses TensorFlow to identify different species of plants.
+Plantify is a machine learning project that uses TensorFlow to identify different species of plants (Basil-Lemon-Mango).
 
 ## Installation
 
