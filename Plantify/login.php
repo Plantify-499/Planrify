@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-          if($_SESSION['user_role'] == 'admin'){
+          if($_SESSION['user_role'] == 'admin'){ # create admin dashboard before presentation
             header('location: admin');
             die();
           }else {

@@ -27,10 +27,11 @@ require_once 'config/app.php';
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-
-
-        <?php if(!isset($_SESSION['logged_in'])): ?>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $config['app_url']."contact.php"?>">Contact Us</a>
+            </li>
+        <?php if(!isset($_SESSION['logged_in'])): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $config['app_url']."login.php"?>">Login</a>
           </li>
@@ -41,17 +42,16 @@ require_once 'config/app.php';
       <?php else: ?>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo $config['app_url'] ?>"><?php echo 'Welcome '.$_SESSION["user_name"]; ?></a>
+            <a class="nav-link" href="<?php echo $config['app_url']."results.php"?>">Plants Results</a>
           </li>
-          <?php if($_SESSION['user_role']=='user'){ ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo $config['app_url']."results.php"?>">Plants Results</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo $config['app_url']."sensors.php"?>">Sensors Results</a>
-            </li>
-          <?php } ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $config['app_url']."plant_care.php"?>">How to take Care?</a>
+          </li>
           <?php if($_SESSION['user_role']=='admin'){ ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $config['app_url']."sensors.php"?>">Monitoring Results</a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="<?php echo $config['app_url']."admin"?>">Admin Page</a>
             </li>
@@ -61,8 +61,8 @@ require_once 'config/app.php';
           </li>
         </ul>
       <?php endif; ?>
-      </div>
-    </nav>
+    </div>
+  </nav>
 
   <div class="container pt-5">
   <?php include 'messages.php'; ?>

@@ -1,4 +1,5 @@
 <?php
+$title = 'Uploads Page';
 require_once 'template/header.php';
 
 $uploadDir = 'uploads/'; // Directory to save uploaded photos

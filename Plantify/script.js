@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Replace YOUR_READ_API_KEY and YOUR_FIELD_NUMBER with your own values
     var url_humidtiy = "https://api.thingspeak.com/channels/2090610/fields/1/last.json?api_key=MXCE7L7HZA5MAOJR";
     var url_temp = "https://api.thingspeak.com/channels/2090610/fields/2/last.json?api_key=MXCE7L7HZA5MAOJR";
     var url_LM = "https://api.thingspeak.com/channels/2090610/fields/3/last.json?api_key=MXCE7L7HZA5MAOJR";
@@ -12,10 +11,10 @@ $(document).ready(function() {
             var field_value = data.field1;
             $("#1").text(field_value);
 
-            if (field_value > 75) {
+            if (field_value < 25) {
                 $("#Fan-button").prop("disabled", true);
                 $("#Fan-button").addClass("gray-button");
-                $("#Fan-button").text("Fan OFF, the humidity is more than 75%");
+                $("#Fan-button").text("Fan Button disabled, the humidity is less than 25%");
             } else {
                 $("#Fan-button").prop("disabled", false);
                 $("#Fan-button").removeClass("gray-button");
@@ -40,7 +39,8 @@ $(document).ready(function() {
             if (field_value > 75) {
                 $("#waterPump-button").prop("disabled", true);
                 $("#waterPump-button").addClass("gray-button");
-                $("#waterPump-button").text("Water pump OFF, the soil moisture is more than 75%");
+                $("#waterPump-button").text("Water pump disabled, the soil moisture is more than 75%");
+
             } else {
                 $("#waterPump-button").prop("disabled", false);
                 $("#waterPump-button").removeClass("gray-button");
@@ -68,7 +68,6 @@ $(document).ready(function() {
     var LightOn = false;
     $("#waterPump-button").click(function() {
         if ($("#waterPump-button").prop("disabled")) {
-            // The water pump is disabled due to high soil moisture
             return;
         } else {
             isOn = !isOn;
@@ -79,7 +78,6 @@ $(document).ready(function() {
 
     $("#Fan-button").click(function() {
         if ($("#Fan-button").prop("disabled")) {
-            // The water pump is disabled due to high soil moisture
             return;
         } else {
             fanOn = !fanOn;
@@ -90,7 +88,6 @@ $(document).ready(function() {
 
     $("#Light-button").click(function() {
         if ($("#Light-button").prop("disabled")) {
-            // The water pump is disabled due to high soil moisture
             return;
         } else {
             LightOn = !LightOn;
@@ -111,9 +108,9 @@ $(document).ready(function() {
         }
     }
 
-    
+
     function updateButton2() {
-     
+
 
         if (fanOn){
             $("#Fan-button").removeClass("off-button");
@@ -128,7 +125,7 @@ $(document).ready(function() {
     }
 
     function updateButton3() {
-     
+
 
         if (LightOn){
             $("#Light-button").removeClass("off-button");
@@ -144,7 +141,7 @@ $(document).ready(function() {
 
     function sendData(value) {
         var url = "https://api.thingspeak.com/update?api_key=QJAP8I7INE7QTTUJ&field1=" + value;
-      
+
         $.ajax({
           url: url,
           type: "GET",
@@ -159,7 +156,7 @@ $(document).ready(function() {
 
     function sendData2(value) {
         var url = "https://api.thingspeak.com/update?api_key=MLYW1GUO9T1TWUHR&field1=" + value;
-      
+
         $.ajax({
           url: url,
           type: "GET",
@@ -174,7 +171,7 @@ $(document).ready(function() {
 
     function sendData3(value) {
         var url = "https://api.thingspeak.com/update?api_key=0ILWUY2JXJ19CL9Z&field1=" + value;
-      
+
         $.ajax({
           url: url,
           type: "GET",
