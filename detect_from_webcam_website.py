@@ -98,6 +98,5 @@ if __name__ == '__main__':
                 f.write("")
 
 
-#Ask the doctor which one to use ,
-# python .\detect_from_webcam.py -m ssd_mobilenet_v2_320x320_coco17_tpu-8\saved_model -l .\data\mscoco_label_map.pbtxt
+# Command to start script
 #  python .\detect_from_webcam_website.py -m C:\Users\nawwa\Desktop\BasilLemonMango_Model\new_model\content\inference_graph\saved_model\ -l .\labelmap.pbtxt

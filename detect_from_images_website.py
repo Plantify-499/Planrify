@@ -186,7 +186,7 @@ if __name__ == '__main__':
     # closing connection object
     mysqlCon.close()
 
-    print("Bye")
+
+
 # Command to start script
-#  python .\detect_from_images.py -m ssd_mobilenet_v2_320x320_coco17_tpu-8\saved_model -l .\data\mscoco_label_map.pbtxt -i .\test_images
 #  python .\detect_from_images_website.py -m C:\Users\nawwa\Desktop\BasilLemonMango_Model\new_model\content\inference_graph\saved_model\ -l .\labelmap.pbtxt -i C:\xamppP\htdocs\Plantify\uploads
