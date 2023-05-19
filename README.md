@@ -2,65 +2,35 @@
 
 ## Description
 
-Plantify is a machine learning project that uses TensorFlow to identify different species of plants (Basil-Lemon-Mango).
+This repository contains the source code for a comprehensive web application that combines plant analysis and care functionalities. The system enables users to register, log in, and upload images of plant leaves for analysis. Using TensorFlow model, the application accurately detects the type of plant leaf among mango, basil, and lemon varieties.
 
-## Installation
+Once the analysis is complete, users can view the results on the intuitive `results.php` page. They have the option to download the analyzed results or remove the uploaded photo. Additionally, the application offers valuable advice and guidance for nurturing and growing the identified plants, which can be found on the dedicated `plant_care.php` page.
 
-To use Plantify, you will need to install TensorFlow. Here are the installation steps:
+The system also includes an admin dashboard, providing administrators with privileged access to manage users, control their privileges, and create new accounts. Administrators can effortlessly modify plant care information, add new plants to the system, and effectively handle messages received from users through the `contact.php` page. Additionally, the dashboard provides real-time monitoring of environmental factors such as temperature, humidity, and soil moisture, obtained via an Arduino Uno device integrated into the plant. The sensor data is seamlessly retrieved through the ThingSpeak API.
 
-1. Install Anaconda: Visit the Anaconda website and download the version that is compatible with your operating system. Follow the installation instructions.
+## Installation and Setup
 
-2. Create a new Anaconda environment: Open Anaconda Prompt or your terminal and type the following command to create a new environment named "tensorflow":
+Please follow the steps below to set up the Plant Analysis and Care System:
 
-    `conda create --name tensorflow`
-
-3. Activate the environment: Type the following command to activate the environment:
-
-    `conda activate tensorflow`
-
-4. Install TensorFlow: Type the following command to install TensorFlow:
-
-    `pip install tensorflow`
-
-5. Verify the installation: Type the following command to verify that TensorFlow is installed correctly:
-
-    `python -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"`
-
-   If the installation was successful, this command should output a random number.
-
-6. Set up TensorFlow Directory and Anaconda Virtual Environment:
-
-    - Create a new directory: Create a new directory where you will store your TensorFlow projects.
-
-    - Create a new Anaconda environment: Open Anaconda Prompt or your terminal and type the following command to create a new environment named "tensorflow_project":
-
-        `conda create --name tensorflow_project`
-
-    - Activate the environment: Type the following command to activate the environment:
-
-        `conda activate tensorflow_project`
-
-    - Install TensorFlow: Type the following command to install TensorFlow in the new environment:
-
-        `pip install tensorflow`
-
-    - Verify the installation: Type the following command to verify that TensorFlow is installed correctly:
-
-        `python -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"`
-
-       If the installation was successful, this command should output a random number.
-
-    - Change directory: Change your current directory to the new directory you created in step 1.
-
-        `cd path/to/your/new/directory`
-
-    - Create a new Python file: Create a new Python file in the new directory and start coding your TensorFlow project.
+1. Clone the repository to your local machine.
+2. Set up XAMPP and ensure it is running properly.
+3. Place the cloned repository in the `htdocs` directory of your XAMPP installation.
+4. Create a MySQL database using the provided SQL file.
+5. Configure the database connection in the appropriate files (e.g., `config.php`, `db.php`).
+6. Install the required dependencies for the TensorFlow model and ensure it is properly set up.
+7. Configure the ThingSpeak API for accessing sensor data from the Arduino Uno device.
+8. Start the XAMPP web server.
+9. Run `detect_from_images_website.py` on the server to continuously check the `uploads` folder for new images and perform the analysis. Make sure the script is running before any analysis is expected.
+10. Access the application through a web browser by navigating to the local URL where it is hosted (e.g., `http://localhost/Plantify`).
 
 ## Usage
 
-python .\detect_from_images.py -m C:\path\to\the\model\content\inference_graph\saved_model\ -l .\labelmap.pbtxt -i C:\path/to/images/folder
+1. Sign up for a new account or log in if you already have one.
+2. Upload a photo of a plant leaf using the `upload.php` page.
+3. Wait for the server-side script (`detect_from_images_website.py`) to detect and analyze the uploaded photo.
+4. Access the `results.php` page to view the analysis results for the uploaded photo.
+5. Explore the admin dashboard to manage users, plant care information, messages, and sensor data.
 
-![Result](outputs/detection_output0.png)
 
 ## Contributing
 
