@@ -30,7 +30,7 @@ Please follow the steps below to set up the Plant Analysis and Care System:
 2. Upload a photo of a plant leaf using the `upload.php` page.
 ![Alt Text](relative_path_to_image)
 3. Wait for the server-side script (`detect_from_images_website.py`) to detect and analyze the uploaded photo.
-![Python file is running](../Documents/detect_from_images_website.png)
+![Python file is running](Documents/detect_from_images_website.png)
 4. Access the `results.php` page to view the analysis results for the uploaded photo.
 ![Results](relative_path_to_image)
 5. Explore the admin dashboard to manage users, plant care information, messages, and sensor data.
