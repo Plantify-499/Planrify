@@ -35,6 +35,7 @@ Please follow the steps below to set up the Plant Analysis and Care System:
 ![Results](Documents/PlantResults.png)
 5. Explore the admin dashboard to manage users, plant care information, messages, and sensor data.
 ![Admin Dashboard](Documents/AdminPanel.png)
+6. Monitoring sensors results (Admin Privileges).
 ![Admin Monitoring Results](Documents/AdminPrivMonitoring.png)
 
 ## Contributing
