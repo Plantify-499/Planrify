@@ -88,6 +88,7 @@ def run_inference_for_single_image(model, image):
 
 
 def run_inference(model, category_index, image_path):
+
     if os.path.isdir(image_path):
         image_paths = []
         for file_extension in ('*.png', '*jpg'):
@@ -104,7 +105,7 @@ def run_inference(model, category_index, image_path):
             # Actual detection.
             output_dict = run_inference_for_single_image(model, image_np)
             # Visualization of the results of a detection.
-            vis_util.visualize_boxes_and_labels_on_image_array(
+            image_np,detected_classes = vis_util.visualize_boxes_and_labels_on_image_array(
                 image_np,
                 output_dict['detection_boxes'],
                 output_dict['detection_classes'],
@@ -114,9 +115,15 @@ def run_inference(model, category_index, image_path):
                 use_normalized_coordinates=True,
                 line_thickness=8)
 
+
             """The existing plt lines do not work on local pc as they are not setup for GUI
                 Use plt.savefig() to save the results instead and view them in a folder"""
-
+            #str(list)
+            TextForDetectedClasses = "".join(str(detected_classes))
+            # Remove single quotes
+            TextForDetectedClasses = TextForDetectedClasses.replace("'", "")
+            # Remove square brackets
+            TextForDetectedClasses = TextForDetectedClasses.replace("[", "").replace("]", "")
             plt.imshow(image_np)
             # plt.show()
             if not os.path.exists('C:/xamppP/htdocs/Plantify/proccessed_images'):
@@ -124,7 +131,7 @@ def run_inference(model, category_index, image_path):
             file_name = 'proccessed_images/'+str(uuid.uuid4())+'.png'
             plt.savefig("C:/xamppP/htdocs/Plantify/"+file_name)  # make sure to make an outputs folder
             # assign data query
-            query1 = """INSERT INTO proceeded_images (user_id, image_path) VALUES (%d,'%s')""" % (int((user_id)),file_name)
+            query1 = """INSERT INTO proceeded_images (user_id, image_path, detected_classes) VALUES (%d,'%s','%s')""" % (int((user_id)),file_name,TextForDetectedClasses)
 
             # executing cursor
             mysqlObj.execute(query1)
