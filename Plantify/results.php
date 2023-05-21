@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['delete_pic'])) {
       <div class="card-body">
       <img src="<?php  echo $config['app_url'].$pic['image_path']; ?>" width="400" height="400">
         <div class="">ID: <?php echo $pic['id']; ?></div>
+        <div class="">Detected plant: <?php if ($pic['detected_classes'] == null) echo "Null"; else echo $pic['detected_classes']; ?></div>
         <div class="">Date of analysis: <?php echo $pic['analysis_date']; ?></div>
 
         <a href="<?php echo $pic['image_path']; ?>" download>
