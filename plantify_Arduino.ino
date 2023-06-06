@@ -1,7 +1,7 @@
 #include <DHT.h>         // Include Adafruit DHT11 Sensors Library
-int ledpin = 12;
-int waterpump =  8;
-int fan = 2 ;
+#define ledpin  12
+#define waterpump   8
+#define fan  2 
 #define DHTPIN 4
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
@@ -31,24 +31,23 @@ void loop () {
   float lightINt = light_intensity();
   float waterlvl = WaterLEVEL();
 
-  analogRead(A0);
   String dhtData = String(hum) + "," + String(temp) + "," + String(LMtemp) + "," + String (Soil) + "," + String(lightINt) + "," + String(waterlvl);
   Serial.println(dhtData);
 
 
 
 
-//
-//  if (Soil < 15) {
-//    digitalWrite(waterpump, LOW);
-//    delay(5000);
-//        digitalWrite(waterpump, HIGH);
-//
-//    if (Soil > 40) {
-//      digitalWrite(waterpump, HIGH);
-//
-//    }
-//  }
+
+  if (Soil < 15) {
+    digitalWrite(waterpump, LOW);
+    delay(5000);
+        digitalWrite(waterpump, HIGH);
+
+    if (Soil > 40) {
+      digitalWrite(waterpump, HIGH);
+
+    }
+  }
   if (hum > 60 ) {
     digitalWrite(fan , LOW);
   }
@@ -56,25 +55,25 @@ void loop () {
 
   if (Serial.available() > 0) {
     Serial.println();
-    char inputFromPython = Serial.read();
+    char inputFromNodeRed = Serial.read();
 
 
-    if (inputFromPython == 'A' || inputFromPython == '5') {
+    if (inputFromNodeRed == '5') {
       digitalWrite(ledpin, HIGH);
-    } if (inputFromPython == 'B' || inputFromPython == '4') {
+    } if (inputFromNodeRed == '4') {
       digitalWrite(ledpin, LOW);
     }
 
-    if (inputFromPython == 'C' || inputFromPython == '1') {
+    if (inputFromNodeRed == '1') {
       digitalWrite(waterpump, LOW);
 
-    } if (inputFromPython == 'D' || inputFromPython == '0') {
+    } if ( inputFromNodeRed == '0') {
       digitalWrite(waterpump, HIGH);
     }
-    if (inputFromPython == 'E' || inputFromPython == '2') {
+    if ( inputFromNodeRed == '2') {
       digitalWrite(fan , LOW);
     }
-    if (inputFromPython == 'F' || inputFromPython == '3') {
+    if ( inputFromNodeRed == '3') {
       digitalWrite(fan , HIGH);
     }
 
@@ -89,55 +88,69 @@ void loop () {
 
 float dht11Humditiy() {
   float H = dht.readHumidity();
-  String Hum = String (H) ;
+  if(isnan(H)){
+    H =-1;
+  }
   return H ;
 
 }
 float dht11temp() {
   float T = dht.readTemperature();
-  String temp = String (T) ;
+ if(isnan(T)){
+    T =-1;
+  }
+  
   return T ;
 
 }
 
 float LM35temp() {
   //Read Raw ADC Data
-  int adcData = analogRead(lm35);
+  int analog_data = analogRead(lm35);
+  if(isnan(analog_data)){
+      return -1 ;
+  }
   // Convert that ADC Data into voltage
-  float voltage = adcData * (5.0 / 1024.0);
+  float voltage = analog_data * (5.0 / 1024.0);
 
   // Convert the voltage into temperature
-  float tt = voltage * 100;
+  float lm_temp = voltage * 100;
 
-  // String Lmtemp = String(tt);
-  return tt;
+  return lm_temp;
 }
 
 float SoilMoisture() {
 
-  int sensor_analog = analogRead(soil);
-  float moisture_percentage = ( 100 - ( (sensor_analog / 1023.00) * 100 ) );
-  String s = String(moisture_percentage);
+  int analog_data = analogRead(soil);
+   if(isnan(analog_data)){
+      return -1 ;
+  }
+  float moisture_percentage = ( 100 - ( (analog_data / 1023.00) * 100 ) );
   return moisture_percentage;
 
 }
 
 float WaterLEVEL() {
   int minWaterLevel = 0;
-  int maxWaterLevel = 1023;
-  float waterlevel = analogRead(waterLevel);
+  int maxWaterLevel = 510;
+  float analog_data = analogRead(waterLevel);
+   if(isnan(analog_data)){
+      return -1 ;
+  }
 
-  float percentage = map(waterLevel, minWaterLevel, 510, 0, 100);
+  float percentage = map(analog_data, minWaterLevel, maxWaterLevel, 0, 100);
 
-  return waterlevel ;
+  return percentage ;
 }
 
 float  light_intensity() {
   int minLight = 0;
   int maxLight = 1023;
-
-  float lightread = analogRead(light);
-  float Light_percentage = map(lightread, minLight, maxLight, 0, 100);
+  float analog_data = analogRead(light);
+     if(isnan(analog_data)){
+      return -1 ;
+  }
+  float Light_percentage = map(analog_data, minLight, maxLight, 0, 100);
 
 
   return Light_percentage ;
