@@ -1,0 +1,74 @@
+body {
+	background-color: rgba(65, 241, 65, 0.418);
+}
+
+h1 {
+	background-color: rgba(0, 0, 0, 0.418);
+	color: white;
+	padding: 10px;
+}
+
+.value-set {
+	display: inline-block;
+	vertical-align: top;
+	margin: 10px;
+}
+
+.value-set p {
+	margin: 0;
+	padding: 5px;
+}
+
+.value-set p:not(:last-child) {
+	border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.value-set p strong {
+	display: inline-block;
+	width: 150px;
+}
+
+.button-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#waterPump-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+}
+
+#Fan-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
+
+#Light-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
+
+
+.off-button {
+	background-color: red;
+}
+
+.on-button {
+	background-color: green;
+}
+
+.gray-button {
+	background-color: gray;
+}

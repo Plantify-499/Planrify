@@ -108,9 +108,9 @@ $(document).ready(function() {
         }
     }
 
-
+    
     function updateButton2() {
-
+     
 
         if (fanOn){
             $("#Fan-button").removeClass("off-button");
@@ -125,7 +125,7 @@ $(document).ready(function() {
     }
 
     function updateButton3() {
-
+     
 
         if (LightOn){
             $("#Light-button").removeClass("off-button");
@@ -141,7 +141,7 @@ $(document).ready(function() {
 
     function sendData(value) {
         var url = "https://api.thingspeak.com/update?api_key=QJAP8I7INE7QTTUJ&field1=" + value;
-
+      
         $.ajax({
           url: url,
           type: "GET",
@@ -156,7 +156,7 @@ $(document).ready(function() {
 
     function sendData2(value) {
         var url = "https://api.thingspeak.com/update?api_key=MLYW1GUO9T1TWUHR&field1=" + value;
-
+      
         $.ajax({
           url: url,
           type: "GET",
@@ -171,7 +171,7 @@ $(document).ready(function() {
 
     function sendData3(value) {
         var url = "https://api.thingspeak.com/update?api_key=0ILWUY2JXJ19CL9Z&field1=" + value;
-
+      
         $.ajax({
           url: url,
           type: "GET",
