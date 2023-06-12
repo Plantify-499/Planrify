@@ -40,9 +40,9 @@ void loop () {
 
   if (Soil < 15) {
     digitalWrite(waterpump, LOW);
-    delay(5000);
+    delay(3000);
         digitalWrite(waterpump, HIGH);
-
+  delay(2000);
     if (Soil > 40) {
       digitalWrite(waterpump, HIGH);
 
@@ -58,9 +58,9 @@ void loop () {
     char inputFromNodeRed = Serial.read();
 
 
-    if (inputFromNodeRed == '5') {
+    if (inputFromNodeRed == '4') {
       digitalWrite(ledpin, HIGH);
-    } if (inputFromNodeRed == '4') {
+    } if (inputFromNodeRed == '5') {
       digitalWrite(ledpin, LOW);
     }
 
@@ -88,17 +88,13 @@ void loop () {
 
 float dht11Humditiy() {
   float H = dht.readHumidity();
-  if(isnan(H)){
-    H =-1;
-  }
+  
   return H ;
 
 }
 float dht11temp() {
   float T = dht.readTemperature();
- if(isnan(T)){
-    T =-1;
-  }
+
   
   return T ;
 
@@ -131,8 +127,8 @@ float SoilMoisture() {
 }
 
 float WaterLEVEL() {
-  int minWaterLevel = 0;
-  int maxWaterLevel = 510;
+  int minWaterLevel = 56;
+  int maxWaterLevel = 93;
   float analog_data = analogRead(waterLevel);
    if(isnan(analog_data)){
       return -1 ;
@@ -145,7 +141,7 @@ float WaterLEVEL() {
 
 float  light_intensity() {
   int minLight = 0;
-  int maxLight = 1023;
+  int maxLight = 600;
   float analog_data = analogRead(light);
      if(isnan(analog_data)){
       return -1 ;
