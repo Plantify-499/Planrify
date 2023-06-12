@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var url_humidtiy = "https://api.thingspeak.com/channels/2090610/fields/1/last.json?api_key=MXCE7L7HZA5MAOJR";
     var url_temp = "https://api.thingspeak.com/channels/2090610/fields/2/last.json?api_key=MXCE7L7HZA5MAOJR";
     var url_LM = "https://api.thingspeak.com/channels/2090610/fields/3/last.json?api_key=MXCE7L7HZA5MAOJR";
@@ -7,7 +7,7 @@ $(document).ready(function() {
     var url_Light = "https://api.thingspeak.com/channels/2090610/fields/6/last.json?api_key=MXCE7L7HZA5MAOJR";
 
     function updateValues() {
-        $.getJSON(url_humidtiy, function(data) {
+        $.getJSON(url_humidtiy, function (data) {
             var field_value = data.field1;
             $("#1").text(field_value);
 
@@ -22,21 +22,21 @@ $(document).ready(function() {
             }
         });
 
-        $.getJSON(url_temp, function(data) {
+        $.getJSON(url_temp, function (data) {
             var field_value = data.field2;
             $("#2").text(field_value);
         });
 
-        $.getJSON(url_LM, function(data) {
+        $.getJSON(url_LM, function (data) {
             var field_value = data.field3;
             $("#3").text(field_value);
         });
 
-        $.getJSON(url_Soil, function(data) {
+        $.getJSON(url_Soil, function (data) {
             var field_value = data.field4;
             $("#4").text(field_value);
 
-            if (field_value > 75) {
+            if (field_value > 90) {
                 $("#waterPump-button").prop("disabled", true);
                 $("#waterPump-button").addClass("gray-button");
                 $("#waterPump-button").text("Water pump disabled, the soil moisture is more than 75%");
@@ -48,12 +48,32 @@ $(document).ready(function() {
             }
         });
 
-        $.getJSON(url_waterLevel, function(data) {
+        $.getJSON(url_waterLevel, function (data) {
             var field_value = data.field5;
             $("#5").text(field_value);
+            if(field_value < 10){
+
+                $("#water-tank").fadeIn();
+
+            }else{
+                $("#water-tank").fadeOut();
+
+            }
+
+     /*       if (field_value < 15) {
+                $("#waterPump-button").prop("disabled", true);
+                $("#waterPump-button").addClass("gray-button");
+                $("#waterPump-button").text("Water pump OFF");
+
+
+            } else {
+                $("#waterPump-button").prop("disabled", false);
+                $("#waterPump-button").removeClass("gray-button");
+                updateButton();
+            }*/
         });
 
-        $.getJSON(url_Light, function(data) {
+        $.getJSON(url_Light, function (data) {
             var field_value = data.field6;
             $("#6").text(field_value);
         });
@@ -66,7 +86,7 @@ $(document).ready(function() {
     var isOn = false;
     var fanOn = false;
     var LightOn = false;
-    $("#waterPump-button").click(function() {
+    $("#waterPump-button").click(function () {
         if ($("#waterPump-button").prop("disabled")) {
             return;
         } else {
@@ -76,7 +96,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#Fan-button").click(function() {
+    $("#Fan-button").click(function () {
         if ($("#Fan-button").prop("disabled")) {
             return;
         } else {
@@ -86,7 +106,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#Light-button").click(function() {
+    $("#Light-button").click(function () {
         if ($("#Light-button").prop("disabled")) {
             return;
         } else {
@@ -108,15 +128,15 @@ $(document).ready(function() {
         }
     }
 
-    
-    function updateButton2() {
-     
 
-        if (fanOn){
+    function updateButton2() {
+
+
+        if (fanOn) {
             $("#Fan-button").removeClass("off-button");
             $("#Fan-button").addClass("on-button");
             $("#Fan-button").text("Fan ON");
-        }else {
+        } else {
             $("#Fan-button").removeClass("on-button");
             $("#Fan-button").addClass("off-button");
             $("#Fan-button").text("Fan OFF");
@@ -125,13 +145,13 @@ $(document).ready(function() {
     }
 
     function updateButton3() {
-     
 
-        if (LightOn){
+
+        if (LightOn) {
             $("#Light-button").removeClass("off-button");
             $("#Light-button").addClass("on-button");
             $("#Light-button").text("Light ON");
-        }else {
+        } else {
             $("#Light-button").removeClass("on-button");
             $("#Light-button").addClass("off-button");
             $("#Light-button").text("Light OFF");
@@ -141,46 +161,76 @@ $(document).ready(function() {
 
     function sendData(value) {
         var url = "https://api.thingspeak.com/update?api_key=QJAP8I7INE7QTTUJ&field1=" + value;
-      
+        var button = $("#waterPump-button");
+
         $.ajax({
-          url: url,
-          type: "GET",
-          success: function(data) {
-            console.log("Data sent successfully.");
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Error sending data: " + textStatus);
-          }
+            url: url,
+            type: "GET",
+            success: function (data) {
+                console.log("Data sent to the API successfully.");
+                if (value == 1) {
+
+                    $("#success-message").text("Data sent successfully, water pump turned on")
+                    $("#success-message").fadeIn().delay(1500).fadeOut();
+
+                } else {
+                    $("#success-message2").text("Data sent successfully, water pump turned off")
+                    $("#success-message2").fadeIn().delay(1500).fadeOut();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error sending data: " + textStatus);
+
+            }
         });
     }
 
     function sendData2(value) {
         var url = "https://api.thingspeak.com/update?api_key=MLYW1GUO9T1TWUHR&field1=" + value;
-      
+
         $.ajax({
-          url: url,
-          type: "GET",
-          success: function(data) {
-            console.log("Data sent successfully.");
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Error sending data: " + textStatus);
-          }
+            url: url,
+            type: "GET",
+            success: function (data) {
+                console.log("Data sent successfully.");
+                if (value == 2) {
+
+                    $("#success-message").text("Data sent successfully, fan turned on");
+                    $("#success-message").fadeIn().delay(1500).fadeOut();
+                } else {
+                    $("#success-message2").text("Data sent successfully, fan turned off");
+                    $("#success-message2").fadeIn().delay(1500).fadeOut();
+
+                }
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error sending data: " + textStatus);
+            }
         });
     }
 
     function sendData3(value) {
         var url = "https://api.thingspeak.com/update?api_key=0ILWUY2JXJ19CL9Z&field1=" + value;
-      
+
         $.ajax({
-          url: url,
-          type: "GET",
-          success: function(data) {
-            console.log("Data sent successfully.");
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Error sending data: " + textStatus);
-          }
+            url: url,
+            type: "GET",
+            success: function (data) {
+                console.log("Data sent successfully.");
+                if (value == 4) {
+
+                    $("#success-message").text("Data sent successfully, light turned on");
+                    $("#success-message").fadeIn().delay(1500).fadeOut();
+                } else {
+                    $("#success-message2").text("Data sent successfully, light turned off");
+                    $("#success-message2").fadeIn().delay(1500).fadeOut();
+
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error sending data: " + textStatus);
+            }
         });
     }
 });
