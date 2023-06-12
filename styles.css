@@ -1,0 +1,122 @@
+
+
+.value-set {
+	display: inline-block;
+	vertical-align: top;
+	margin: 10px;
+}
+
+.value-set p {
+	
+	margin: 0;
+	padding: 5px;
+}
+
+.value-set p:not(:last-child) {
+	border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.value-set p strong {
+	display: inline-block;
+	width: 150px;
+}
+
+.button-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#waterPump-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+}
+
+#Fan-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
+
+#Light-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
+
+
+.off-button {
+	background-color: red;
+}
+
+.on-button {
+	background-color: green;
+}
+
+.gray-button {
+	background-color: gray;
+}
+
+#success-message {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 320px;
+	background-color: green;
+	padding: 10px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+#success-message2 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 320px;
+	background-color: rgba(255, 0, 0, 0.8);
+	padding: 10px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+#error-message {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 50px;
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 10px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+#water-tank {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 50px;
+	background-color: rgba(0, 38, 255, 0.8);
+	padding: 10px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+.water-tank {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 9999;
+}
